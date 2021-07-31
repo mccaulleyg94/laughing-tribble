@@ -1,7 +1,7 @@
 import { writeFile, mkdirSync, existsSync } from "fs";
 import FileReader from "./FileReader";
 export default class Reporter {
-  static basePath = './reports/';
+  static basePath = './';
   static monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
@@ -17,7 +17,7 @@ export default class Reporter {
   }
   static report(context: string | NodeJS.ArrayBufferView | object): void {
     const date = new Date();
-    const dir = `${this.basePath}${this.monthNames[date.getMonth()]}/${date.getDate()}`;
+    const dir = `${this.basePath}reports${this.monthNames[date.getMonth()]}/${date.getDate()}`;
     Reporter.checkMakeDir(dir);
     const filePath = `${dir}/${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}.json`;
     writeFile(filePath,
