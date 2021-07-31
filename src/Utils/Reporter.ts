@@ -17,7 +17,7 @@ export default class Reporter {
   }
   static report(context: string | NodeJS.ArrayBufferView | object): void {
     const date = new Date();
-    const dir = `${this.basePath}reports${this.monthNames[date.getMonth()]}/${date.getDate()}`;
+    const dir = `${this.basePath}reports/${this.monthNames[date.getMonth()]}/${date.getDate()}`;
     Reporter.checkMakeDir(dir);
     const filePath = `${dir}/${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}.json`;
     writeFile(filePath,
