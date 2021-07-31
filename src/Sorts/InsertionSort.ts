@@ -1,7 +1,7 @@
-import { SortingConstants } from './../../Enums/SortingConstants';
-import Comparable from '../../Interfaces/Comparable';
-import Sorter from '../../Interfaces/Sorter';
-import Testable from '../../Interfaces/Testable';
+import { SortingConstants } from '../Enums/SortingConstants';
+import Comparable from '../Interfaces/Comparable';
+import Sorter from '../Interfaces/Sorter';
+import Testable from '../Interfaces/Testable';
 import TimeTable from '../Models/TimeTable';
 
 export default class InsertionSort<T extends Comparable<T>> implements Sorter<T>, Testable {

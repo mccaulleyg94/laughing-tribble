@@ -1,11 +1,11 @@
 import { EmployeeConstants } from './Enums/EmployeeConstants';
-import InsertionSort from './Classes/Sorts/InsertionSort';
-import BubbleSort from './Classes/Sorts/BubbleSort';
-import MyNumber from './Classes/Models/MyNumber';
+import InsertionSort from './Sorts/InsertionSort';
+import BubbleSort from './Sorts/BubbleSort';
+import MyNumber from './Models/MyNumber';
 import { SortingConstants } from './Enums/SortingConstants';
 import Reporter from './Utils/Reporter';
 import Sorter from './Interfaces/Sorter';
-import Employee from './Classes/Models/Employee';
+import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
 
 class Main {

@@ -1,5 +1,5 @@
-import Comparable from "../../Interfaces/Comparable";
-import Employed from "../../Interfaces/Employed";
+import Comparable from "../Interfaces/Comparable";
+import Employed from "../Interfaces/Employed";
 import Role from "./Role";
 
 export default class Employee implements Employed, Comparable<Employee> {

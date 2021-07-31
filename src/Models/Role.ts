@@ -1,4 +1,4 @@
-import { EmployeeConstants } from './../../Enums/EmployeeConstants';
+import { EmployeeConstants } from '../Enums/EmployeeConstants';
 import Employee from './Employee';
 export default class Role {
   role_id?: EmployeeConstants;

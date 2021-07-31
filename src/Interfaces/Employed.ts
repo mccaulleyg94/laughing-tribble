@@ -1,4 +1,4 @@
-import Role from '../Classes/Models/Role';
+import Role from '../Models/Role';
 import Comparable from './Comparable';
 export default interface Employed extends Comparable<Employed> {
   e_id: number;

@@ -1,7 +1,7 @@
-import { SortingConstants } from '../../Enums/SortingConstants';
-import Sorter from '../../Interfaces/Sorter';
-import Comparable from '../../Interfaces/Comparable';
-import Testable from '../../Interfaces/Testable';
+import { SortingConstants } from '../Enums/SortingConstants';
+import Sorter from '../Interfaces/Sorter';
+import Comparable from '../Interfaces/Comparable';
+import Testable from '../Interfaces/Testable';
 import TimeTable from '../Models/TimeTable';
 export default class BubbleSort<T extends Comparable<T>> implements Testable, Sorter<T> {
   measure(start: number, end: number, context: string): void {

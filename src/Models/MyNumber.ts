@@ -1,4 +1,4 @@
-import Comparable from '../../Interfaces/Comparable';
+import Comparable from '../Interfaces/Comparable';
 export default class MyNumber implements Comparable<MyNumber> {
   num: number;
   constructor(num?: number) {

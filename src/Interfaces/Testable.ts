@@ -1,4 +1,4 @@
-import TimeTable from "../Classes/Models/TimeTable";
+import TimeTable from "../Models/TimeTable";
 
 export default interface Testable {
   time_table: TimeTable[];

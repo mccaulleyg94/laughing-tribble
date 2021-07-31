@@ -1,5 +1,5 @@
-import Comparable from "../../Interfaces/Comparable";
-import Searcher from "../../Interfaces/Searcher";
+import Comparable from "../Interfaces/Comparable";
+import Searcher from "../Interfaces/Searcher";
 import TimeTable from "./TimeTable";
 
 export default class BinarySearch<T extends Comparable<T>> implements Searcher<T> {
