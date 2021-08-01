@@ -5,12 +5,13 @@ import Reporter from './Utils/Reporter';
 import Sorter from './Interfaces/Sorter';
 import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
+import SelectionSort from './Sorts/SelectionSort';
 
 class Main {
   static async main(args?: unknown): Promise<void> {
     console.log('Running...');
     const sorters
-      : Sorter<Employee>[] = [new BubbleSort(), new InsertionSort()];
+      : Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort];
     const validator = new ComparableValidator();
     for (let sorter of sorters) {
       for (let i = 0; i < 10; i++) {
@@ -22,8 +23,8 @@ class Main {
         validator.validateSorted(employees, SortingConstants.DECREASING);
       }
     }
-    let data = await Reporter.report({ sorters });
-    console.log('Done', data);
+    let data = JSON.parse(await Reporter.report({ sorters }));
+    console.log('Done', JSON.stringify(data, undefined, ' '));
   }
 }
 
