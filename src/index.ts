@@ -22,12 +22,9 @@ class Main {
         validator.validateSorted(employees, SortingConstants.DECREASING);
       }
     }
-    await Reporter.report({
-      sorters
-    });
-    console.log('Program done');
-    if (args) console.log(typeof args);
+    let data = await Reporter.report({ sorters });
+    console.log('Done', data);
   }
 }
 
-Main.main('LOL');
+Main.main();
