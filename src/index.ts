@@ -6,16 +6,20 @@ import Sorter from './Interfaces/Sorter';
 import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
 import SelectionSort from './Sorts/SelectionSort';
+import HashTable from './Data_Structs/HashTable';
 
 class Main {
   static async main(args?: unknown): Promise<void> {
     console.log('Running...');
-    const sorters: Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort];
+
+    // ==========================
+
+    const sorters: Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort()];
     const validator: ComparableValidator<Employee> = new ComparableValidator();
     for (let sorter of sorters) {
       for (let i = 0; i < 10; i++) {
-        let employees: Employee[] = [];
-        for (let j = 0; j < 1000; j++) {
+        const employees: Employee[] = [];
+        for (let j = 0; j < 10; j++) {
           employees.push(new Employee());
         }
         sorter.sort(employees, SortingConstants.DECREASING);
@@ -23,7 +27,21 @@ class Main {
       }
     }
     let data: unknown = JSON.parse(await Reporter.report(sorters));
-    console.log('Done', JSON.stringify(data, undefined, ' '));
+
+    // ==========================
+
+    // ==========================
+
+    const hashTable = new HashTable<Employee>();
+    for (let i: number = 0; i < 100; i++) {
+      hashTable.put(new Employee());
+    }
+    hashTable.print();
+    console.log(hashTable.get('383'));
+
+    // ==========================
+
+    console.log('Done');
   }
 }
 
