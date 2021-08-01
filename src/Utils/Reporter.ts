@@ -1,11 +1,10 @@
 import { writeFile, mkdirSync, existsSync } from "fs";
 import FileReader from "./FileReader";
 export default class Reporter {
-  static basePath = './';
+  static basePath = '.';
   static monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  static weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   static checkMakeDir(path: string) {
     let incrementalPath = '';
     path.split('/').forEach(
@@ -17,7 +16,7 @@ export default class Reporter {
   }
   static async report(context: string | NodeJS.ArrayBufferView | object): Promise<string> {
     const date = new Date();
-    const dir = `${this.basePath}reports/${this.monthNames[date.getMonth()]}/${date.getDate()}`;
+    const dir = `${this.basePath}/reports/${this.monthNames[date.getMonth()]}/${date.getDate()}`;
     Reporter.checkMakeDir(dir);
     const filePath = `${dir}/${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}.json`;
     writeFile(filePath,
