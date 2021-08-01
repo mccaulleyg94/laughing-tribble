@@ -10,9 +10,8 @@ import SelectionSort from './Sorts/SelectionSort';
 class Main {
   static async main(args?: unknown): Promise<void> {
     console.log('Running...');
-    const sorters
-      : Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort];
-    const validator = new ComparableValidator();
+    const sorters: Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort];
+    const validator: ComparableValidator<Employee> = new ComparableValidator();
     for (let sorter of sorters) {
       for (let i = 0; i < 10; i++) {
         let employees: Employee[] = [];
@@ -23,7 +22,7 @@ class Main {
         validator.validateSorted(employees, SortingConstants.DECREASING);
       }
     }
-    let data = JSON.parse(await Reporter.report({ sorters }));
+    let data: unknown = JSON.parse(await Reporter.report(sorters));
     console.log('Done', JSON.stringify(data, undefined, ' '));
   }
 }
