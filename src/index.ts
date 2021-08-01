@@ -1,7 +1,5 @@
-import { EmployeeConstants } from './Enums/EmployeeConstants';
 import InsertionSort from './Sorts/InsertionSort';
 import BubbleSort from './Sorts/BubbleSort';
-import MyNumber from './Models/MyNumber';
 import { SortingConstants } from './Enums/SortingConstants';
 import Reporter from './Utils/Reporter';
 import Sorter from './Interfaces/Sorter';
