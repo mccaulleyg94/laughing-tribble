@@ -15,7 +15,7 @@ export default class Reporter {
       }
     )
   }
-  static report(context: string | NodeJS.ArrayBufferView | object): void {
+  static async report(context: string | NodeJS.ArrayBufferView | object): Promise<void> {
     const date = new Date();
     const dir = `${this.basePath}reports/${this.monthNames[date.getMonth()]}/${date.getDate()}`;
     Reporter.checkMakeDir(dir);
@@ -23,6 +23,6 @@ export default class Reporter {
     writeFile(filePath,
       typeof context == 'object' ? JSON.stringify(context, undefined, ' ') : context,
       () => { console.log(`WROTE TO ${filePath}`) });
-    FileReader.parse(filePath);
+    await FileReader.parse(filePath);
   }
 }

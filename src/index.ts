@@ -9,7 +9,7 @@ import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
 
 class Main {
-  static main() {
+  static async main(args?: unknown): Promise<void> {
     console.log('Running...');
     const sorters
       : Sorter<Employee>[] = [new BubbleSort(), new InsertionSort()];
@@ -24,11 +24,12 @@ class Main {
         validator.validateSorted(employees, SortingConstants.DECREASING);
       }
     }
-    Reporter.report({
+    await Reporter.report({
       sorters
     });
     console.log('Program done');
+    if (args) console.log(typeof args);
   }
 }
 
-Main.main();
+Main.main('LOL');
