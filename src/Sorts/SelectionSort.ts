@@ -26,7 +26,7 @@ export default class SelectionSort<T extends Comparable<T>> implements Sorter<T>
       iterations++;
     }
 
-    this.measure(start, Date.now(), `${this.constructor.name}-${comparables.length} elements (${comparables[0].constructor.name}), iterations: ${iterations}`);
+    this.measure(start, Date.now(), `${this.constructor.name} - ${comparables.length} elements(${comparables[0].constructor.name}), iterations: ${iterations}`);
   }
   time_table: TimeTable[];
   measure(start: number, end: number, context: string): void {

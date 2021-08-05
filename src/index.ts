@@ -7,13 +7,18 @@ import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
 import SelectionSort from './Sorts/SelectionSort';
 import HashTable from './Data_Structs/HashTable';
+import MyNumber from './Models/MyNumber';
+import { throws } from 'assert';
 
 class Main {
   static async main(args?: unknown): Promise<void> {
     console.log('Running...');
+    this.sortingTest();
+    this.hashTableTest();
+    console.log('Done');
+  }
 
-    // ==========================
-
+  static async sortingTest(): Promise<void> {
     const sorters: Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort()];
     const validator: ComparableValidator<Employee> = new ComparableValidator();
     for (let sorter of sorters) {
@@ -27,21 +32,15 @@ class Main {
       }
     }
     let data: unknown = JSON.parse(await Reporter.report(sorters));
+  }
 
-    // ==========================
-
-    // ==========================
-
+  static async hashTableTest(): Promise<void> {
     const hashTable = new HashTable<Employee>();
     for (let i: number = 0; i < 100; i++) {
       hashTable.put(new Employee());
     }
-    hashTable.print();
-    console.log(hashTable.get('383'));
-
-    // ==========================
-
-    console.log('Done');
+    console.log(hashTable.get('305')?.equals(hashTable.get('304')!));
+    console.log(hashTable.get('305')?.equals(hashTable.get('305')!));
   }
 }
 
