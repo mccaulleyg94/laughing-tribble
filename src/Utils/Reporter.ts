@@ -1,6 +1,7 @@
 import { writeFile, mkdirSync, existsSync } from "fs";
 import FileReader from "./FileReader";
 export default class Reporter {
+  static iterator = 0;
   static basePath = '.';
   static monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -18,7 +19,7 @@ export default class Reporter {
     const date = new Date();
     const dir = `${this.basePath}/reports/${this.monthNames[date.getMonth()]}/${date.getDate()}`;
     Reporter.checkMakeDir(dir);
-    const filePath = `${dir}/${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}.json`;
+    const filePath = `${dir}/${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}-${this.iterator++}.json`;
     writeFile(filePath,
       typeof context == 'object' ? JSON.stringify(context, undefined, ' ') : context,
       () => { console.log(`WROTE TO ${filePath}`) });

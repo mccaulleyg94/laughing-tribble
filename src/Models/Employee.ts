@@ -12,7 +12,7 @@ export default class Employee implements Employed, Comparable<Employee>, Hashabl
   role: Role;
   e_id: number;
   constructor() {
-    this.role = { role_id: 0, reports_to: undefined };
+    this.role = new Role();
     this.e_id = Employee.counter++;
   }
   equals(comparer: Employee): boolean {

@@ -40,7 +40,7 @@ class Main {
       hashTable.put(new Employee());
     }
     console.log(hashTable.get('305')?.equals(hashTable.get('304')!));
-    console.log(hashTable.get('305')?.equals(hashTable.get('305')!));
+    console.log(await Reporter.report(hashTable));
   }
 }
 
