@@ -7,41 +7,45 @@ import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
 import SelectionSort from './Sorts/SelectionSort';
 import HashTable from './Data_Structs/HashTable';
-import MyNumber from './Models/MyNumber';
-import { throws } from 'assert';
 
 class Main {
   static async main(args?: unknown): Promise<void> {
     console.log('Running...');
-    this.sortingTest();
-    this.hashTableTest();
+
+    if (typeof args === 'function') {
+      await args.call(this);
+    }
+
     console.log('Done');
   }
 
-  static async sortingTest(): Promise<void> {
+  static run = async (): Promise<void> => {
+    Reporter.report({ table: await Main.hashTableTest(), sorts: await Main.sortingTest() });
+  }
+
+  static sortingTest = async (): Promise<unknown> => {
     const sorters: Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort()];
     const validator: ComparableValidator<Employee> = new ComparableValidator();
     for (let sorter of sorters) {
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 3; i++) {
         const employees: Employee[] = [];
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < 3; j++) {
           employees.push(new Employee());
         }
         sorter.sort(employees, SortingConstants.DECREASING);
         validator.validateSorted(employees, SortingConstants.DECREASING);
       }
     }
-    let data: unknown = JSON.parse(await Reporter.report(sorters));
+    return sorters;
   }
 
-  static async hashTableTest(): Promise<void> {
+  static hashTableTest = async (): Promise<unknown> => {
     const hashTable = new HashTable<Employee>();
-    for (let i: number = 0; i < 100; i++) {
+    for (let i: number = 0; i < 25; i++) {
       hashTable.put(new Employee());
     }
-    console.log(hashTable.get('305')?.equals(hashTable.get('304')!));
-    console.log(await Reporter.report(hashTable));
+    return hashTable;
   }
 }
 
-Main.main();
+Main.main(Main.run);
