@@ -9,6 +9,9 @@ import SelectionSort from './Sorts/SelectionSort';
 import HashTable from './Data_Structs/HashTable';
 
 class Main {
+
+  static DEBUG = true;
+
   static async main(args?: unknown): Promise<void> {
     console.log('Running...');
 
@@ -20,7 +23,28 @@ class Main {
   }
 
   static run = async (): Promise<void> => {
-    Reporter.report({ table: await Main.hashTableTest(), sorts: await Main.sortingTest() });
+    await Main.typeCheck({ name: 'LOL' });
+  }
+
+  static itrTest = async (): Promise<void> => {
+    const COUNTS: number[] = [];
+    const LOOP_COUNT: number = 10;
+    for (let i: number = 0; i < LOOP_COUNT; i++) {
+      let start: number = Date.now();
+      let itr: number = 0;
+      while (Date.now() - start < 1000) {
+        itr++;
+      }
+      COUNTS.push(itr);
+    }
+    const avg: number = COUNTS.reduce((a, b) => { return a + b }) / COUNTS.length
+    Main.DEBUG
+      && console.log('AVERAGE: ', avg, COUNTS)
+      || Reporter.report({ counts: COUNTS, average: avg, context: `Number iteration speed - ${LOOP_COUNT} loops` });
+  }
+
+  static typeCheck = async (value: unknown): Promise<void> => {
+    value && console.log(typeof value);
   }
 
   static sortingTest = async (): Promise<unknown> => {

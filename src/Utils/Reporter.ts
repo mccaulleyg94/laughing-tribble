@@ -1,11 +1,11 @@
 import { writeFile, mkdirSync, existsSync } from "fs";
 import FileReader from "./FileReader";
 export default class Reporter {
-  static basePath = '.';
-  static monthNames = ["January", "February", "March", "April", "May", "June",
+  private static basePath = '.';
+  private static monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  static checkMakeDir(path: string) {
+  private static checkMakeDir(path: string) {
     let incrementalPath = '';
     path.split('/').forEach(
       subpath => {
