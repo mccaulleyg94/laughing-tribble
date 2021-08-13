@@ -1,4 +1,4 @@
-import Comparable from '../Interfaces/Comparable';
+import Comparable from '../../Interfaces/Comparable';
 /**
  * @class Num
  * @summary Wrapper class for number that implements comparable function.

@@ -8,6 +8,11 @@ import ComparableValidator from './Utils/ComparableValidator';
 import SelectionSort from './Algos/SelectionSort';
 import HashTable from './Data_Structs/HashTable';
 import { randomNumber, randomEnum } from './Utils/Random';
+import { randomBytes } from 'crypto';
+import Comparable from './Interfaces/Comparable';
+import Num_Counts from './Models/Wrappers/Tasks/Num_Counts';
+import Task from './Models/Wrappers/Tasks/Tasks';
+import inspect from 'util';
 
 class Main {
 
@@ -24,7 +29,28 @@ class Main {
   }
 
   static run = async (): Promise<void> => {
+    const util = require('util');
+    const slayerTasks: Task[] = [];
+    const trips = 100000;
+    const drop = 512;
+    for (let i = 0; i < trips; i++) {
+      const kills = randomNumber(150, 200);
+      const arr: Num_Counts[] = [];
+      for (let j = 0; j < kills; j++) {
+        const random = randomNumber(0, drop + 1);
+        if (arr[random]) {
+          arr[random].count++;
+        } else {
+          arr[random] = new Num_Counts(random);
+          arr[random].count++;
+        }
+      }
+      slayerTasks.push(new Task(i, kills, arr
+        .filter(elem => elem && elem.num == drop)));
+    }
 
+    const results = slayerTasks.filter(task => task.tasks[0]?.count >= 2);
+    Main.DEBUG && Reporter.report(results);
   }
 
   static itrTest = async (): Promise<void> => {
