@@ -1,12 +1,13 @@
-import InsertionSort from './Sorts/InsertionSort';
-import BubbleSort from './Sorts/BubbleSort';
+import InsertionSort from './Algos/InsertionSort';
+import BubbleSort from './Algos/BubbleSort';
 import { SortingConstants } from './Enums/SortingConstants';
 import Reporter from './Utils/Reporter';
 import Sorter from './Interfaces/Sorter';
 import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
-import SelectionSort from './Sorts/SelectionSort';
+import SelectionSort from './Algos/SelectionSort';
 import HashTable from './Data_Structs/HashTable';
+import { randomNumber, randomEnum } from './Utils/Random';
 
 class Main {
 
@@ -23,7 +24,7 @@ class Main {
   }
 
   static run = async (): Promise<void> => {
-    await Main.typeCheck({ name: 'LOL' });
+
   }
 
   static itrTest = async (): Promise<void> => {
@@ -41,10 +42,6 @@ class Main {
     Main.DEBUG
       && console.log('AVERAGE: ', avg, COUNTS)
       || Reporter.report({ counts: COUNTS, average: avg, context: `Number iteration speed - ${LOOP_COUNT} loops` });
-  }
-
-  static typeCheck = async (value: unknown): Promise<void> => {
-    value && console.log(typeof value);
   }
 
   static sortingTest = async (): Promise<unknown> => {

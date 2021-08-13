@@ -1,4 +1,4 @@
-import TimeTable from "../Models/TimeTable";
+import TimeTable from "../Algos/AlgoUtils/TimeTable";
 
 export default interface Testable {
   time_table: TimeTable[];

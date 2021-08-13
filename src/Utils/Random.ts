@@ -4,3 +4,7 @@ export function randomEnum<T>(anEnum: T): T[keyof T] {
   const randomEnumValue = enumValues[randomIndex]
   return randomEnumValue;
 }
+
+export function randomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min) + min);
+}

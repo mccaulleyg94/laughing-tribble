@@ -2,7 +2,7 @@ import { SortingConstants } from '../Enums/SortingConstants';
 import Sorter from '../Interfaces/Sorter';
 import Comparable from '../Interfaces/Comparable';
 import Testable from '../Interfaces/Testable';
-import TimeTable from '../Models/TimeTable';
+import TimeTable from './AlgoUtils/TimeTable';
 export default class BubbleSort<T extends Comparable<T>> implements Testable, Sorter<T> {
   measure(start: number, end: number, context: string): void {
     this.time_table.push({ time: `${end - start} ms`, context: context })

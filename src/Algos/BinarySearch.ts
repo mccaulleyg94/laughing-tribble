@@ -1,6 +1,6 @@
 import Comparable from "../Interfaces/Comparable";
 import Searcher from "../Interfaces/Searcher";
-import TimeTable from "./TimeTable";
+import TimeTable from "./AlgoUtils/TimeTable";
 
 export default class BinarySearch<T extends Comparable<T>> implements Searcher<T> {
 
