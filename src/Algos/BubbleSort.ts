@@ -1,4 +1,4 @@
-import { SortingConstants } from '../Enums/SortingConstants';
+import { Sort } from '../Enums/Sort';
 import Sorter from '../Interfaces/Sorter';
 import Comparable from '../Interfaces/Comparable';
 import Testable from '../Interfaces/Testable';
@@ -13,7 +13,7 @@ export default class BubbleSort<T extends Comparable<T>> implements Testable, So
 
   time_table: TimeTable[];
 
-  sort(comparables: T[], sortingConstant: SortingConstants): void {
+  sort(comparables: T[], sortingConstant: Sort): void {
     let iterations = 0;
     const start = Date.now();
     for (let i = 0; i < comparables.length; i++) {

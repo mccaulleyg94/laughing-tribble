@@ -1,11 +1,11 @@
-import { SortingConstants } from "../Enums/SortingConstants";
+import { Sort } from "../Enums/Sort";
 import Comparable from "../Interfaces/Comparable";
 import Sorter from "../Interfaces/Sorter";
 import Testable from "../Interfaces/Testable";
 import TimeTable from "./AlgoUtils/TimeTable";
 
 export default class SelectionSort<T extends Comparable<T>> implements Sorter<T>, Testable {
-  sort(comparables: T[], sortingConstant: SortingConstants): void {
+  sort(comparables: T[], sortingConstant: Sort): void {
     let iterations = 0;
     const start = Date.now();
 

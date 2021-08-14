@@ -1,6 +1,6 @@
 import InsertionSort from './Algos/InsertionSort';
 import BubbleSort from './Algos/BubbleSort';
-import { SortingConstants } from './Enums/SortingConstants';
+import { Sort } from './Enums/Sort';
 import Reporter from './Utils/Reporter';
 import Sorter from './Interfaces/Sorter';
 import Employee from './Models/Employee';
@@ -10,8 +10,8 @@ import HashTable from './Data_Structs/HashTable';
 import { randomNumber, randomEnum } from './Utils/Random';
 import { randomBytes } from 'crypto';
 import Comparable from './Interfaces/Comparable';
-import Num_Counts from './Models/Wrappers/Tasks/Num_Counts';
-import Task from './Models/Wrappers/Tasks/Tasks';
+import Drop from './Models/Wrappers/Slayer/Drop';
+import Task from './Models/Wrappers/Slayer/Task';
 import inspect from 'util';
 
 class Main {
@@ -22,38 +22,40 @@ class Main {
     console.log('Running...');
 
     if (typeof args === 'function') {
-      await args.call(this);
+      args.call(this)
     }
 
     console.log('Done');
   }
 
   static run = async (): Promise<void> => {
-    const util = require('util');
-    const slayerTasks: Task[] = [];
+    await Main.drop_log();
+  }
+
+  static drop_log = async (): Promise<void> => {
+    const slayer_tasks: Task[] = [];
     const trips = 100000;
-    const drop = 512;
+    const drop_chance = 500;
     for (let i = 0; i < trips; i++) {
-      const kills = randomNumber(150, 200);
-      const arr: Num_Counts[] = [];
+      const kills = randomNumber(150, 250);
+      const drops: Drop[] = [];
       for (let j = 0; j < kills; j++) {
-        const random = randomNumber(0, drop + 1);
-        if (arr[random]) {
-          arr[random].count++;
+        const random = randomNumber(0, drop_chance + 1);
+        if (drops[random]) {
+          drops[random].count++;
         } else {
-          arr[random] = new Num_Counts(random);
-          arr[random].count++;
+          drops[random] = new Drop(random);
+          drops[random].count++;
         }
       }
-      slayerTasks.push(new Task(i, kills, arr
-        .filter(elem => elem && elem.num == drop)));
+      slayer_tasks.push(new Task(i, kills, drops
+        .filter((drop) => drop && drop.num == drop_chance)));
     }
-
-    const results = slayerTasks.filter(task => task.tasks[0]?.count >= 2);
+    const results = slayer_tasks.filter(task => task.tasks[0]?.count >= 3).sort((task0, task1) => task0.compare(task1));
     Main.DEBUG && Reporter.report(results);
   }
 
-  static itrTest = async (): Promise<void> => {
+  static itr_test = async (): Promise<void> => {
     const COUNTS: number[] = [];
     const LOOP_COUNT: number = 10;
     for (let i: number = 0; i < LOOP_COUNT; i++) {
@@ -70,7 +72,7 @@ class Main {
       || Reporter.report({ counts: COUNTS, average: avg, context: `Number iteration speed - ${LOOP_COUNT} loops` });
   }
 
-  static sortingTest = async (): Promise<unknown> => {
+  static sorting_test = async (): Promise<unknown> => {
     const sorters: Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort()];
     const validator: ComparableValidator<Employee> = new ComparableValidator();
     for (let sorter of sorters) {
@@ -79,14 +81,14 @@ class Main {
         for (let j = 0; j < 3; j++) {
           employees.push(new Employee());
         }
-        sorter.sort(employees, SortingConstants.DECREASING);
-        validator.validateSorted(employees, SortingConstants.DECREASING);
+        sorter.sort(employees, Sort.DECREASING);
+        validator.validateSorted(employees, Sort.DECREASING);
       }
     }
     return sorters;
   }
 
-  static hashTableTest = async (): Promise<unknown> => {
+  static hash_table_test = async (): Promise<unknown> => {
     const hashTable = new HashTable<Employee>();
     for (let i: number = 0; i < 25; i++) {
       hashTable.put(new Employee());

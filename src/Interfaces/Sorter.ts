@@ -1,7 +1,7 @@
 import Testable from './Testable';
-import { SortingConstants } from './../Enums/SortingConstants';
+import { Sort } from '../Enums/Sort';
 import Comparable from "./Comparable";
 
 export default interface Sorter<T extends Comparable<T>> extends Testable {
-  sort(comparables: T[], sortingConstant: SortingConstants): void;
+  sort(comparables: T[], sortingConstant: Sort): void;
 }
