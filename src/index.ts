@@ -7,11 +7,11 @@ import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
 import SelectionSort from './Algos/SelectionSort';
 import HashTable from './Data_Structs/HashTable';
-import { randomNumber, randomEnum } from './Utils/Random';
+import { random_number, random_enum } from './Utils/Random';
 import { randomBytes } from 'crypto';
 import Comparable from './Interfaces/Comparable';
-import Drop from './Models/Wrappers/Slayer/Drop';
-import Task from './Models/Wrappers/Slayer/Task';
+import Drop from './Models/Slayer/Drop';
+import Task from './Models/Slayer/Task';
 import inspect from 'util';
 
 class Main {
@@ -37,10 +37,10 @@ class Main {
     const trips = 100000;
     const drop_chance = 500;
     for (let i = 0; i < trips; i++) {
-      const kills = randomNumber(150, 250);
+      const kills = random_number(150, 250);
       const drops: Drop[] = [];
       for (let j = 0; j < kills; j++) {
-        const random = randomNumber(0, drop_chance + 1);
+        const random = random_number(0, drop_chance + 1);
         if (drops[random]) {
           drops[random].count++;
         } else {

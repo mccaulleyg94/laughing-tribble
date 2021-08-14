@@ -1,4 +1,4 @@
-import Comparable from "../../../Interfaces/Comparable";
+import Comparable from "../../Interfaces/Comparable";
 import Drop from "./Drop";
 
 export default class Task implements Comparable<Task> {

@@ -5,7 +5,7 @@ import Testable from "../Interfaces/Testable";
 import TimeTable from "./AlgoUtils/TimeTable";
 
 export default class SelectionSort<T extends Comparable<T>> implements Sorter<T>, Testable {
-  sort(comparables: T[], sortingConstant: Sort): void {
+  sort(comparables: T[], sorting_constant: Sort): void {
     let iterations = 0;
     const start = Date.now();
 
@@ -14,7 +14,7 @@ export default class SelectionSort<T extends Comparable<T>> implements Sorter<T>
       let min = i;
       for (let j = i + 1; j < n; j++) {
         iterations++;
-        if (comparables[j].compare(comparables[min]) == sortingConstant) {
+        if (comparables[j].compare(comparables[min]) == sorting_constant) {
           min = j;
         }
       }

@@ -13,12 +13,12 @@ export default class BubbleSort<T extends Comparable<T>> implements Testable, So
 
   time_table: TimeTable[];
 
-  sort(comparables: T[], sortingConstant: Sort): void {
+  sort(comparables: T[], sorting_constant: Sort): void {
     let iterations = 0;
     const start = Date.now();
     for (let i = 0; i < comparables.length; i++) {
       for (let j = 0; j < comparables.length; j++) {
-        if (comparables[j + 1] && comparables[j].compare(comparables[j + 1]) == -sortingConstant) {
+        if (comparables[j + 1] && comparables[j].compare(comparables[j + 1]) == -sorting_constant) {
           const temp = comparables[j];
           comparables[j] = comparables[j + 1];
           comparables[j + 1] = temp;

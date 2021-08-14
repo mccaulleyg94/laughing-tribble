@@ -5,14 +5,14 @@ import Testable from '../Interfaces/Testable';
 import TimeTable from './AlgoUtils/TimeTable';
 
 export default class InsertionSort<T extends Comparable<T>> implements Sorter<T>, Testable {
-  sort(comparables: T[], sortingConstant: Sort): void {
+  sort(comparables: T[], sorting_constant: Sort): void {
     let iterations = 0;
     const start = Date.now();
     let key, j;
     for (let i = 1; i < comparables.length; i++) {
       key = comparables[i];
       j = i - 1;
-      while (j >= 0 && comparables[j].compare(key) == -sortingConstant) {
+      while (j >= 0 && comparables[j].compare(key) == -sorting_constant) {
         comparables[j + 1] = comparables[j];
         j = j - 1;
         iterations++;

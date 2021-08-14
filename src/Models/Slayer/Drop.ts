@@ -1,4 +1,4 @@
-import Comparable from "../../../Interfaces/Comparable";
+import Comparable from "../../Interfaces/Comparable";
 
 export default class Drop implements Comparable<Drop>{
   num: number;
