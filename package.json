@@ -11,12 +11,14 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^16.4.1",
+    "@types/pg-promise": "^5.4.3",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
     "eslint": "^7.31.0",
     "nodemon": "^2.0.12"
   },
   "dependencies": {
-    "FileReader": "^0.10.2"
+    "FileReader": "^0.10.2",
+    "pg-promise": "^10.11.0"
   }
 }

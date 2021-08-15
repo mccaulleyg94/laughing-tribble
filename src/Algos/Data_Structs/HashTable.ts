@@ -1,4 +1,4 @@
-import Hashable from "../Interfaces/Hashable";
+import Hashable from "../../Interfaces/Hashable";
 
 export default class HashTable<V extends Hashable> {
   values: Record<string | symbol | number, V | null> = {};

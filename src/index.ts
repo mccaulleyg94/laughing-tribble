@@ -6,13 +6,13 @@ import Sorter from './Interfaces/Sorter';
 import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
 import SelectionSort from './Algos/SelectionSort';
-import HashTable from './Data_Structs/HashTable';
+import HashTable from './Algos/Data_Structs/HashTable';
 import { random_number, random_enum } from './Utils/Random';
 import { randomBytes } from 'crypto';
 import Comparable from './Interfaces/Comparable';
 import Drop from './Models/Slayer/Drop';
 import Task from './Models/Slayer/Task';
-import inspect from 'util';
+import { db } from './Data/Connection';
 
 class Main {
 
@@ -22,20 +22,24 @@ class Main {
     console.log('Running...');
 
     if (typeof args === 'function') {
-      args.call(this)
+      args.call(this);
     }
 
     console.log('Done');
   }
 
   static run = async (): Promise<void> => {
-    await Main.drop_log();
+    await Main.connection_test();
+  }
+
+  static connection_test = async (): Promise<void> => {
+    console.log(await db.any('SELECT * FROM ecommerce.customer'));
   }
 
   static drop_log = async (): Promise<void> => {
     const slayer_tasks: Task[] = [];
-    const trips = 100000;
-    const drop_chance = 500;
+    const trips = 5;
+    const drop_chance = 512;
     for (let i = 0; i < trips; i++) {
       const kills = random_number(150, 250);
       const drops: Drop[] = [];
@@ -50,8 +54,9 @@ class Main {
       }
       slayer_tasks.push(new Task(i, kills, drops
         .filter((drop) => drop && drop.num == drop_chance)));
+      i % 10000 == 0 && console.log(i);
     }
-    const results = slayer_tasks.filter(task => task.tasks[0]?.count >= 3).sort((task0, task1) => task0.compare(task1));
+    const results = slayer_tasks.filter(task => task.tasks[0]?.count >= 1).sort((task0, task1) => task0.compare(task1));
     Main.DEBUG && Reporter.report(results);
   }
 
