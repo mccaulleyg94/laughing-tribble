@@ -2,9 +2,10 @@ import Comparable from "../Interfaces/Comparable";
 import Employed from "../Interfaces/Employed";
 import Equals from "../Interfaces/Equals";
 import Hashable from "../Interfaces/Hashable";
+import Person from "./Person";
 import Role from "./Role";
 
-export default class Employee implements Employed, Comparable<Employee>, Hashable, Equals<Employee> {
+export default class Employee extends Person implements Employed, Comparable<Employee>, Hashable, Equals<Employee>, Person {
   compare(comparable: Employee): number {
     return this.e_id < comparable.e_id ? -1 : 1;
   }
@@ -12,6 +13,7 @@ export default class Employee implements Employed, Comparable<Employee>, Hashabl
   role: Role;
   e_id: number;
   constructor() {
+    super()
     this.role = new Role();
     this.e_id = Employee.counter++;
   }

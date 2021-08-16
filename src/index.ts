@@ -7,18 +7,18 @@ import Employee from './Models/Employee';
 import ComparableValidator from './Utils/ComparableValidator';
 import SelectionSort from './Algos/SelectionSort';
 import HashTable from './Algos/Data_Structs/HashTable';
-import { random_number, random_enum } from './Utils/Random';
-import { randomBytes } from 'crypto';
-import Comparable from './Interfaces/Comparable';
+import { random_number } from './Utils/Random';
 import Drop from './Models/Slayer/Drop';
 import Task from './Models/Slayer/Task';
-import { db } from './Data/Connection';
+import { db, truncate, select_all } from './Data/Connection';
+import { tables } from './resources/ConnectionString'
+import Person from './Models/Person';
 
 class Main {
 
-  static DEBUG = true;
+  DEBUG = true;
 
-  static async main(args?: unknown): Promise<void> {
+  async main(args?: unknown): Promise<void> {
     console.log('Running...');
 
     if (typeof args === 'function') {
@@ -28,15 +28,21 @@ class Main {
     console.log('Done');
   }
 
-  static run = async (): Promise<void> => {
-    await Main.connection_test();
+  run = async (): Promise<void> => {
+    await this.connection_test();
   }
 
-  static connection_test = async (): Promise<void> => {
-    console.log(await db.any('SELECT * FROM ecommerce.customer'));
+  connection_test = async (): Promise<void> => {
+    await truncate(tables.person);
+    for (let i = 0; i < 100; i++) {
+      const p: Person = new Person();
+      await db.query(`INSERT INTO ${tables.person} VALUES (default, $1, $2, $3)`, [p.name, p.age, p.gender]);
+    }
+    const people: Person[] = await select_all(tables.person);
+    console.log(people);
   }
 
-  static drop_log = async (): Promise<void> => {
+  drop_log = async (): Promise<void> => {
     const slayer_tasks: Task[] = [];
     const trips = 5;
     const drop_chance = 512;
@@ -57,10 +63,10 @@ class Main {
       i % 10000 == 0 && console.log(i);
     }
     const results = slayer_tasks.filter(task => task.tasks[0]?.count >= 1).sort((task0, task1) => task0.compare(task1));
-    Main.DEBUG && Reporter.report(results);
+    this.DEBUG && Reporter.report(results);
   }
 
-  static itr_test = async (): Promise<void> => {
+  itr_test = async (): Promise<void> => {
     const COUNTS: number[] = [];
     const LOOP_COUNT: number = 10;
     for (let i: number = 0; i < LOOP_COUNT; i++) {
@@ -72,12 +78,12 @@ class Main {
       COUNTS.push(itr);
     }
     const avg: number = COUNTS.reduce((a, b) => { return a + b }) / COUNTS.length
-    Main.DEBUG
+    this.DEBUG
       && console.log('AVERAGE: ', avg, COUNTS)
       || Reporter.report({ counts: COUNTS, average: avg, context: `Number iteration speed - ${LOOP_COUNT} loops` });
   }
 
-  static sorting_test = async (): Promise<unknown> => {
+  sorting_test = async (): Promise<unknown> => {
     const sorters: Sorter<Employee>[] = [new BubbleSort(), new InsertionSort(), new SelectionSort()];
     const validator: ComparableValidator<Employee> = new ComparableValidator();
     for (let sorter of sorters) {
@@ -93,7 +99,7 @@ class Main {
     return sorters;
   }
 
-  static hash_table_test = async (): Promise<unknown> => {
+  hash_table_test = async (): Promise<unknown> => {
     const hashTable = new HashTable<Employee>();
     for (let i: number = 0; i < 25; i++) {
       hashTable.put(new Employee());
@@ -102,4 +108,6 @@ class Main {
   }
 }
 
-Main.main(Main.run);
+const main: Main = new Main();
+
+main.main(main.run);
